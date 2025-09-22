@@ -39,10 +39,17 @@ const TransportOptions = () => {
   ];
 
   return (
-    <section className="py-20 px-4 bg-muted/20">
-      <div className="container mx-auto max-w-6xl">
+    <section className="relative py-20 px-4 overflow-hidden bg-gradient-to-br from-[#FFF9E6] via-[#FFE1A1] to-[#FFD27F]">
+      {/* Moving Light Spots */}
+      <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-[radial-gradient(circle,_rgba(255,255,255,0.35)_0%,transparent_70%)] animate-light1 pointer-events-none"></div>
+      <div className="absolute top-1/3 left-1/2 w-[300px] h-[300px] bg-[radial-gradient(circle,_rgba(255,255,255,0.25)_0%,transparent_70%)] animate-light2 pointer-events-none"></div>
+      <div className="absolute bottom-1/4 right-1/3 w-[500px] h-[500px] bg-[radial-gradient(circle,_rgba(255,255,255,0.2)_0%,transparent_70%)] animate-light3 pointer-events-none"></div>
+
+      <div className="container mx-auto max-w-6xl relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">All Transport Options</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4" style={{ color: '#4A2728' }}>
+            All Transport Options
+          </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             From buses to bikes, find every way to get around in one app
           </p>
@@ -82,6 +89,8 @@ const TransportOptions = () => {
         <div className="mt-16">
           <h3 className="text-2xl font-bold text-center mb-8">Live Status</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {/* Example Status Cards */}
+            {/* Bus Status */}
             <Card className="glass-card p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
@@ -109,6 +118,7 @@ const TransportOptions = () => {
               </div>
             </Card>
 
+            {/* Shared Ride Status */}
             <Card className="glass-card p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
@@ -136,6 +146,7 @@ const TransportOptions = () => {
               </div>
             </Card>
 
+            {/* Bike Status */}
             <Card className="glass-card p-6">
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center gap-3">
@@ -162,9 +173,54 @@ const TransportOptions = () => {
                 </div>
               </div>
             </Card>
+
           </div>
+
         </div>
       </div>
+      {/* Train Animation */}
+      <div className="absolute bottom-10 w-full flex justify-end z-0">
+        <div className="text-4xl animate-train">🚂</div>
+      </div>
+
+      <style>
+        {`
+  @keyframes lightMove1 {
+    0% { transform: translate(0,0); }
+    50% { transform: translate(80px, 60px); }
+    100% { transform: translate(0,0); }
+  }
+  @keyframes lightMove2 {
+    0% { transform: translate(0,0); }
+    50% { transform: translate(-60px, 40px); }
+    100% { transform: translate(0,0); }
+  }
+  @keyframes lightMove3 {
+    0% { transform: translate(0,0); }
+    50% { transform: translate(100px, -50px); }
+    100% { transform: translate(0,0); }
+  }
+
+  /* Fixed train animation */
+  @keyframes trainMove {
+    0% { transform: translateX(120vw); }
+    100% { transform: translateX(-120vw); }
+  }
+
+  .animate-light1 { animation: lightMove1 25s ease-in-out infinite; }
+  .animate-light2 { animation: lightMove2 30s ease-in-out infinite; }
+  .animate-light3 { animation: lightMove3 35s ease-in-out infinite; }
+
+  .animate-train {
+    position: absolute;
+    bottom: 2.5rem;
+    font-size: 2.5rem;
+    animation: trainMove 20s linear infinite;
+    z-index: 0;
+  }
+`}
+      </style>
+
     </section>
   );
 };

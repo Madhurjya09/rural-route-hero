@@ -9,16 +9,26 @@ const RouteSearch = () => {
   const [toLocation, setToLocation] = useState("");
 
   return (
-    <section className="py-20 px-4">
-      <div className="container mx-auto max-w-4xl">
+    <section className="relative py-20 px-4 overflow-hidden bg-gradient-to-br from-[#FFF9E6] via-[#FFE1A1] to-[#FFD27F]">
+      {/* Moving Light Spots */}
+      <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-[radial-gradient(circle,_rgba(255,255,255,0.35)_0%,transparent_70%)] animate-light1 pointer-events-none"></div>
+      <div className="absolute top-1/3 left-1/2 w-[300px] h-[300px] bg-[radial-gradient(circle,_rgba(255,255,255,0.25)_0%,transparent_70%)] animate-light2 pointer-events-none"></div>
+      <div className="absolute bottom-1/4 right-1/3 w-[500px] h-[500px] bg-[radial-gradient(circle,_rgba(255,255,255,0.2)_0%,transparent_70%)] animate-light3 pointer-events-none"></div>
+
+      <div className="container mx-auto max-w-4xl relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Plan Your Journey</h2>
+          <h2
+            className="text-3xl md:text-4xl font-bold mb-4"
+            style={{ color: '#4A2728' }}
+          >
+            Plan Your Journey
+          </h2>
           <p className="text-muted-foreground text-lg">
             Find the best transport options between any two locations
           </p>
         </div>
 
-        <Card className="glass-card p-8">
+        <Card className="glass-card p-8 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4 items-end">
             {/* From Location */}
             <div className="space-y-2">
@@ -66,9 +76,9 @@ const RouteSearch = () => {
             </div>
 
             {/* Search Button */}
-            <Button 
-              size="lg" 
-              className="gradient-primary text-primary-foreground font-semibold hover:shadow-lg hover:scale-105 transition-all duration-300"
+            <Button
+              size="lg"
+              className="bg-[#C46200] text-white font-semibold px-8 py-4 text-lg hover:bg-[#B45309] hover:shadow-lg hover:scale-105 transition-all duration-300"
             >
               <Search className="w-4 h-4 mr-2" />
               Search
@@ -77,7 +87,7 @@ const RouteSearch = () => {
         </Card>
 
         {/* Quick Routes */}
-        <div className="mt-8">
+        <div className="mt-8 relative z-10">
           <h3 className="text-lg font-semibold mb-4">Quick Routes</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
@@ -85,7 +95,10 @@ const RouteSearch = () => {
               { from: "Mumbai", to: "Pune", time: "3.5 hrs", price: "₹300" },
               { from: "Chennai", to: "Bangalore", time: "5 hrs", price: "₹450" }
             ].map((route, index) => (
-              <Card key={index} className="glass-card p-4 hover:glow-effect transition-all duration-300 cursor-pointer hover:scale-105">
+              <Card
+                key={index}
+                className="glass-card p-4 hover:glow-effect transition-all duration-300 cursor-pointer hover:scale-105"
+              >
                 <div className="flex justify-between items-center mb-2">
                   <span className="font-medium">{route.from}</span>
                   <ArrowRight className="w-4 h-4 text-muted-foreground" />
@@ -100,6 +113,45 @@ const RouteSearch = () => {
           </div>
         </div>
       </div>
+
+      {/* Plane Animation */}
+      <div className="absolute bottom-0 left-0 w-full h-full flex justify-start items-end animate-plane">
+        <div className="text-4xl">✈️</div>
+      </div>
+
+      <style>
+        {`
+          /* Plane Animation */
+          @keyframes planeMove {
+            0% { transform: translate(0, 0) rotate(10deg); }
+            100% { transform: translate(120vw, -120vh) rotate(10deg); }
+          }
+          .animate-plane {
+            animation: planeMove 25s linear infinite;
+          }
+
+          /* Moving Light Spots */
+          @keyframes lightMove1 {
+            0% { transform: translate(0,0); }
+            50% { transform: translate(80px, 60px); }
+            100% { transform: translate(0,0); }
+          }
+          @keyframes lightMove2 {
+            0% { transform: translate(0,0); }
+            50% { transform: translate(-60px, 40px); }
+            100% { transform: translate(0,0); }
+          }
+          @keyframes lightMove3 {
+            0% { transform: translate(0,0); }
+            50% { transform: translate(100px, -50px); }
+            100% { transform: translate(0,0); }
+          }
+
+          .animate-light1 { animation: lightMove1 25s ease-in-out infinite; }
+          .animate-light2 { animation: lightMove2 30s ease-in-out infinite; }
+          .animate-light3 { animation: lightMove3 35s ease-in-out infinite; }
+        `}
+      </style>
     </section>
   );
 };

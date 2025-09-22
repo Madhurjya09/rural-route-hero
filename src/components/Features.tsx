@@ -42,12 +42,23 @@ const Features = () => {
   ];
 
   return (
-    <section className="py-20 px-4">
-      <div className="container mx-auto max-w-6xl">
+    <section className="relative py-20 px-4 overflow-hidden bg-gradient-to-br from-[#FFF9E6] via-[#FFE1A1] to-[#FFD27F]">
+      
+      {/* Moving Light Spots */}
+      <div className="absolute top-0 left-0 w-[400px] h-[400px] bg-[radial-gradient(circle,_rgba(255,255,255,0.35)_0%,transparent_70%)] animate-light1 pointer-events-none"></div>
+      <div className="absolute top-1/3 left-1/2 w-[300px] h-[300px] bg-[radial-gradient(circle,_rgba(255,255,255,0.25)_0%,transparent_70%)] animate-light2 pointer-events-none"></div>
+      <div className="absolute bottom-1/4 right-1/3 w-[500px] h-[500px] bg-[radial-gradient(circle,_rgba(255,255,255,0.2)_0%,transparent_70%)] animate-light3 pointer-events-none"></div>
+
+      <div className="container mx-auto max-w-6xl relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Built for Rural India</h2>
+          <h2
+            className="text-3xl md:text-4xl font-bold mb-4"
+            style={{ color: '#4A2728' }}
+          >
+            Built for Rural India
+          </h2>
           <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-            Every feature is designed to work in challenging conditions - poor network, 
+            Every feature is designed to work in challenging conditions - poor network,
             old phones, and limited resources
           </p>
         </div>
@@ -56,8 +67,8 @@ const Features = () => {
           {features.map((feature, index) => {
             const IconComponent = feature.icon;
             return (
-              <Card 
-                key={index} 
+              <Card
+                key={index}
                 className="glass-card p-8 hover:glow-effect transition-all duration-300 hover:scale-105 group"
               >
                 <div className="text-center">
@@ -97,6 +108,31 @@ const Features = () => {
           </div>
         </div>
       </div>
+
+      {/* Animation Styles */}
+      <style>
+        {`
+          @keyframes lightMove1 {
+            0% { transform: translate(0,0); }
+            50% { transform: translate(80px, 60px); }
+            100% { transform: translate(0,0); }
+          }
+          @keyframes lightMove2 {
+            0% { transform: translate(0,0); }
+            50% { transform: translate(-60px, 40px); }
+            100% { transform: translate(0,0); }
+          }
+          @keyframes lightMove3 {
+            0% { transform: translate(0,0); }
+            50% { transform: translate(100px, -50px); }
+            100% { transform: translate(0,0); }
+          }
+
+          .animate-light1 { animation: lightMove1 25s ease-in-out infinite; }
+          .animate-light2 { animation: lightMove2 30s ease-in-out infinite; }
+          .animate-light3 { animation: lightMove3 35s ease-in-out infinite; }
+        `}
+      </style>
     </section>
   );
 };
